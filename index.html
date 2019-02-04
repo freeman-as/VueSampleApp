@@ -11,8 +11,8 @@
     <div id="app">
         <button id="b-button" v-bind:title="loggedInButton" v-bind:disabled='!canBuy'>購入</button>
         <p>{{ items[0].name }}: {{ items[0].price }} x {{ items[0].quantity }}</p>
-        <p>合計：{{ items[0].price * items[0].quantity }}</p>
-        <p>フィルタ処理 {{ 1000 | numberWithDelimiter }}</p>
+        <p>小計：{{ totalPrice | numberWithDelimiter }}円</p>
+        <p>合計(税込)：{{ totalPriceWithTax | numberWithDelimiter }}円</p>
     </div>
     <script src="app.js"></script>
 </body>
