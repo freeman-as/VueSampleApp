@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Base Component</title>
+    <script src="https://unpkg.com/vue@2.5.17"></script>
+</head>
+<body>
+    <ul id="example">
+        <list-item></list-item>
+    </ul>
+    <script>
+        Vue.component('list-item', {
+            template: '<li>{{ contents }}</li>',
+            data: function () {
+                return {
+                    contents: 'bar'
+                };
+            }
+        });
+
+        new Vue({ el: '#example' });
+    </script>
+</body>
+</html>
