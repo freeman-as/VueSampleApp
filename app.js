@@ -6,7 +6,7 @@ var items = [
     {
         name: '鉛筆',
         price: 300,
-        quantity: 4
+        quantity: 0
     },
     {
         name: 'ノート',
@@ -23,9 +23,7 @@ var items = [
 var vm = new Vue({
     el: '#app',
     data: {
-        items: items,
-        loggedInButton: 'ログイン済みのため購入できます。',
-        canBuy: false
+        items: items
     },
     filters: {
         numberWithDelimiter: function(value) {
@@ -43,6 +41,15 @@ var vm = new Vue({
         },
         totalPriceWithTax: function () {
             return Math.floor(this.totalPrice * 1.08);
+        },
+        canBuy: function () {
+            return this.totalPrice >= 1000;
+        },
+        errorMessageStyle: function () {
+            return {
+                border: this.canBuy ? '' : '1px solid red',
+                color: this.canBuy ? '' : 'red'
+            };
         }
     }
 })
