@@ -8,20 +8,30 @@
     <script src="https://unpkg.com/vue@2.5.17"></script>
 </head>
 <body>
-    <div id="app">
-        <input-data-with-today></input-data-with-today>
+    <div id="fruits-component">
+        <ol>
+            <fruits-item-name v-for="fruit in fruitsItems" :key="fruit.name" :fruits-item="fruit"></fruits-item-name>
+        </ol>
     </div>
     <script>
-        Vue.component('simple-counter', {
-            templete: '<h1>フルーツ一覧</h1>',
-            data: function () {
-                return {
-                    fruits: ['りんご', 'みかん']
+        Vue.component('fruits-item-name', {
+            props: {
+                fruitsItem: {
+                    type: Object,   // オブジェクトかどうか
+                    required: true  // このコンポーネントには必須なのでtrue
                 }
-            }
-        })
+            },
+            template: '<li>{{ fruitsItem.name }}</li>'
+        });
         new Vue({
-            el: '#app'
+            el: '#fruits-component',
+            data: {
+                // 親では配列だがv-forでObjectとして渡している
+                fruitsItems: [
+                    {name: '梨'},
+                    {name: 'イチゴ'}
+                ]
+            }
         });        
     </script>
 </body>
