@@ -1,1 +1,1 @@
-# VueSampleApp
+# VueSampleApp.
