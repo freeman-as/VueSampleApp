@@ -6,7 +6,7 @@ var items = [
     {
         name: '鉛筆',
         price: 300,
-        quantity: 0
+        quantity: 2
     },
     {
         name: 'ノート',
@@ -23,7 +23,9 @@ var items = [
 var vm = new Vue({
     el: '#app',
     data: {
-        items: items
+        items: items,
+        loggedInButton: 'ログイン済みのため購入できます。',
+        canBuy: false
     }
 })
 window.vm = vm;
