@@ -8,20 +8,21 @@
     <script src="https://unpkg.com/vue@2.5.17"></script>
 </head>
 <body>
-    <ul id="example">
-        <list-item></list-item>
-    </ul>
+    <div id="app">
+        <input-data-with-today></input-data-with-today>
+    </div>
     <script>
-        Vue.component('list-item', {
-            template: '<li>{{ contents }}</li>',
+        Vue.component('simple-counter', {
+            templete: '<h1>フルーツ一覧</h1>',
             data: function () {
                 return {
-                    contents: 'bar'
-                };
+                    fruits: ['りんご', 'みかん']
+                }
             }
-        });
-
-        new Vue({ el: '#example' });
+        })
+        new Vue({
+            el: '#app'
+        });        
     </script>
 </body>
 </html>
