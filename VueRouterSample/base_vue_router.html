@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Router Base</title>
+    <script src="https://unpkg.com/vue@2.5.17"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1"></script>
+</head>
+<body>
+    <script type="text/x-template" id="user-list">
+        <div>ユーザー一覧です。</div>
+    </script>
+    <div id="app">
+        <router-link :to="{name: 'top'}">トップページ</router-link>
+        <router-link to="/users">ユーザー一覧ページ</router-link>
+        <router-link :to="{name: 'user', params: {userId: 123}}">ユーザー詳細ページ</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        var userList = {
+            template: '#user-list',
+            data: function () {
+                return {
+                    users: function () { return [] },
+                    error: null
+                }
+            }
+        };
+
+        var router = new VueRouter({
+            routes: [
+                {
+                    path: '/top',
+                    name: 'top',
+                    component: {
+                        template: '<div>トップページです。</div>'
+                    }
+                },
+                {
+                    path: '/users',
+                    component: userList,
+                    beforeEnter: function (to, from, next) {
+                        if (to.query.redirect === 'true') {
+                            next('/top');
+                        } else {
+                            next();
+                        }
+                    }
+                },
+                {
+                    path: '/user/:userId',
+                    name: 'user',
+                    component: {
+                        template: '<div>ユーザーIDは{{ $route.params.userId }}</div>'
+                    }
+                },
+            ]
+        });
+        router.beforeEach(function (to, from, next) {
+            if (to.path === '/users') {
+                // next('/top');
+                next();
+            } else {
+                next();
+            }
+        })
+        var vm = new Vue({
+            router: router
+        }).$mount('#app');
+    </script>
+</body>
+</html>
