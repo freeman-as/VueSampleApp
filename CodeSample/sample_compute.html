@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sample v-model</title>
+    <script src="https://unpkg.com/vue@2.5.17"></script>
+</head>
+<body>
+    <div id="app">
+        <p>幅：{{ width }}　半分：{{ halfWidth }}</p>
+        <p>高：{{ height }}　半分：{{ halfHeight }}</p>
+        <p>中心{{ halfPoint.x }}, {{ halfPoint.y }}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                width: 400,
+                height: 400
+            },
+            methods: {
+                handleClick: function (event) {
+                    this.message = event.target.value;
+                }
+            },
+            computed: {
+                halfWidth: function () {
+                    return this.width / 2;
+                },
+                halfHeight: function () {
+                    return this.height / 2;
+                },
+                halfPoint: function () {
+                    return {
+                        x: this.halfWidth,
+                        y: this.halfHeight
+                    };
+                }
+            }
+        });
+    </script>
+</body>
+</html>
